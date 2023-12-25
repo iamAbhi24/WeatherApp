@@ -19,12 +19,7 @@ body {
     font-weight: bold;
     color: white;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Add some opacity for better readability */
-}
-
-.input {
-    width: 100%;
-    position: relative;
+    background-color: rgba(0, 0, 0, 0.3); /* Add some opacity for better readability */
 }
 
 .container input {
@@ -32,10 +27,15 @@ body {
     padding-left: 30px;
 }
 
-.input i {
-    position: absolute;
-    left: 10%;
-    top: 50%; /* Vertically center the icon */
-    color: blue;
-    transform: translateY(-50%);
+/* putting the search button inside the search bar */
+span {
+    position: relative;
+    color:black;
 }
+
+span i{
+    position: absolute;
+    left: 10px;
+    transform: translateY(50%);
+}
+
