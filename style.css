@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* setting initial background color and font style */
+body{
+    background-color: #090909;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* positioning the container at the center */
+.container{
+    max-width: 60vw;
+    min-height: 20vh;
+    border: 1px solid whitesmoke;
+    margin: auto;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+/* setting the size of the input field */
+
+.container input{
+    height: 30px;
+}
