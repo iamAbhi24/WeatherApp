@@ -1,28 +1,41 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* setting initial background color and font style */
-body{
-    background-color: #090909;
+body {
+    background-image: url('Backgroundimg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Roboto', sans-serif;
 }
 
-/* positioning the container at the center */
-.container{
+.container {
     max-width: 60vw;
     min-height: 20vh;
-    border: 1px solid whitesmoke;
     margin: auto;
+    margin-top: 20vh;
     font-weight: bold;
     color: white;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Add some opacity for better readability */
 }
 
-/* setting the size of the input field */
+.input {
+    width: 100%;
+    position: relative;
+}
 
-.container input{
+.container input {
     height: 30px;
+    padding-left: 30px;
+}
+
+.input i {
+    position: absolute;
+    left: 10%;
+    top: 50%; /* Vertically center the icon */
+    color: blue;
+    transform: translateY(-50%);
 }
