@@ -9,6 +9,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Roboto', sans-serif;
+
 }
 
 .container {
@@ -23,7 +24,8 @@ body {
 }
 
 .container input {
-    height: 30px;
+    width: 30em;
+    height: 2em;
     padding-left: 30px;
 }
 
@@ -37,5 +39,16 @@ span i{
     position: absolute;
     left: 10px;
     transform: translateY(50%);
+}
+
+.crossIcon{
+    position: relative;
+    color:black;
+}
+.crossIcon i{
+    position: absolute;
+    left: -20px;
+    transform: translateY(50%);
+    cursor: pointer;
 }
 
