@@ -14,9 +14,14 @@ spanElement.appendChild(crossIcon);
 let containerElement=document.querySelector('.container');
 
 
-// Adding cross icon inside the left side of the input text field on input
+// Adding cross icon inside the right side of the input text field on input and removing it when we remove all inputs from the input filed by backspace button .
 function addCrossIcon(){
-    containerElement.appendChild(spanElement);
+    if(document.querySelector('input').value!==''){
+        containerElement.appendChild(spanElement);
+    }
+    else{
+        containerElement.removeChild(spanElement);
+    }
 }
 
 // Remove input after click on cross icon
@@ -26,11 +31,6 @@ crossIcon.addEventListener('click',()=>{
 })
 
 
-document.querySelector('input').addEventListener('blur',()=>{
-    if(document.querySelector('input').value=''){
-        containerElement.removeChild(spanElement);
-    }
-})
 
 
 
