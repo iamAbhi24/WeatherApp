@@ -31,6 +31,25 @@ crossIcon.addEventListener('click',()=>{
 })
 
 
+// Calling  api and fetching the data
+let input=document.querySelector('input');
+let cityName='';    //value from the input
+const apiKey=`6e7683d1c61aa7b9518f67ce32a28ba5`; 
+input.addEventListener('keypress', (event)=>{
+    cityName=input.value; // updating value from the input 
+    const Url=`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;  
+    if(event.key=='Enter' && cityName!=''){
+           fetch(Url)
+           .then((response)=>response.json())
+           .then((data)=>{
+            document.querySelector('h2').innerHTML=`${data.main.temp}<sup>0</sup>c`;
+           })
+           .catch((error)=>{console.log(error)})
+     }
+     else if(event.key=='Enter' && cityName==''){
+        alert("Enter City");
+     }
+})
 
 
 
