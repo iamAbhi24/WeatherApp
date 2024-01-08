@@ -9,7 +9,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Roboto', sans-serif;
-
+    /* font-weight: 100; */
 }
 
 .container {
@@ -55,5 +55,19 @@ span i{
 h2{
     text-align: center;
     color: white;
-    font-size: 2em;
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+#today-temperature{
+    color: white;
+    text-align: center;
+    font-size:3rem;
+}
+
+#weather-condition,#min-max-temperature{
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    margin-top:0.5rem ;
 }
