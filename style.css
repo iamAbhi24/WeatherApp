@@ -65,9 +65,16 @@ h2{
     font-size:3rem;
 }
 
-#weather-condition,#min-max-temperature{
+#weatherTxt,#min-max-temperature{   
     color: white;
     text-align: center;
     font-size: 1rem;
     margin-top:0.5rem ;
+}
+
+/* the container of weather condtion and weather emog */
+.weather_Condition_Emog{
+    display: flex;
+    justify-content:center;
+    transform: translateX(-2%);
 }

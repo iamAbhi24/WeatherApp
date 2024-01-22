@@ -31,26 +31,75 @@ crossIcon.addEventListener('click',()=>{
 })
 
 
+
+
+function displayWeather(currentWeather,dailyWeather){
+    //     //creating parent div for displaying todays weather
+    let todayWeather=document.createElement('div');
+    todayWeather.id='today-weather'; //setting id
+    containerElement.appendChild(todayWeather); // append to the container
+
+    
+        // creating a div inside parent div which will dsiplay todays temperarture
+    let todayTemp=document.createElement('div');
+    todayTemp.id='today-temperature';
+    todayWeather.appendChild(todayTemp); //append to the parent div
+    document.querySelector('#today-temperature').innerHTML=`${currentWeather.current.temp_c}<sup>o</sup>`; //displaying the todays tempertaure
+    
+
+   
+    // ////creating a div inside parent div which will dsiplay current weather condition eg. rain, clear etc.
+    let weatherCondition = document.createElement('div');
+
+    weatherCondition.id='weather-condition';  
+    todayWeather.appendChild(weatherCondition); //append to the parent div
+    document.querySelector('#weather-condition').innerHTML=`<div class="weather_Condition_Emog">   <!-- weather condition emog  and weather condition parent div-->
+    <div id="weatherEmog">    <!-- weather condition emog -->
+     <img src="" alt="" id="currentEmog" width="50%">
+    </div>
+    <div id="weatherTxt">  <!-- weather condition --> 
+     
+    </div>
+    </div>`
+   document.querySelector('#weatherTxt').innerHTML=currentWeather.current.condition.text; // fetching and setting the weather condition
+
+   document.querySelector('#currentEmog').src=currentWeather.current.condition.icon; // fetching and setting the weather condition emog
+
+
+
+    //  // Creating Div inside the parent div which will display todays lowest and higest temperaature.
+ let minMaxTemp = document.createElement('div');
+ minMaxTemp.id='min-max-temperature';
+ todayWeather.appendChild(minMaxTemp); //append to the parent div
+
+document.querySelector('#min-max-temperature').innerHTML= `L :${dailyWeather.forecast.forecastday[0].day.mintemp_c}<sup>o</sup>   H :${dailyWeather.forecast.forecastday[0].day.maxtemp_c}<sup>o</sup>`; // 
+}
+
+
+
+
+
 // Calling  api and fetching the data
 let input=document.querySelector('input');
 let cityName='';    //value from the input
-const apiKey=`6e7683d1c61aa7b9518f67ce32a28ba5`; 
-input.addEventListener('keypress', (event)=>{
+const apiKey=`18efe3f8ffe340c7920100058242201`; 
+input.addEventListener('keypress', (event)=>{ 
     cityName=input.value; // updating value from the input 
-    const Url=`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;  
-    if(event.key=='Enter' && cityName!=''){
-           fetch(Url)
-           .then((response)=>response.json())
-           .then((data)=>{
-            // setting the heading as the name of the city
-           let location = document.createElement('h2');
-            containerElement.appendChild(location);
-            document.querySelector('h2').innerHTML=cityName;
+    const currentUrl=`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${cityName}&aqi=no`; 
+    const forcastUrl=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=3&aqi=no&alerts=no`; 
 
-              //diplay weather condtion
-              weatherCondition(data); 
-           })
-           .catch((error)=>{console.log(error)})
+    if(event.key=='Enter' && cityName!=''){
+        // It will wait for all promise to resolve 
+        Promise.all([fetchCurrentWeather(currentUrl),fetchDailyForcast(forcastUrl)])
+        .then(([currentWeather, dailyWeather])=>{
+                    // setting the heading as the name of the city
+                     let location = document.createElement('h2');
+                     containerElement.appendChild(location);
+                     document.querySelector('h2').innerHTML=cityName.toUpperCase();
+
+                    //Display Current weather
+                    displayWeather(currentWeather,dailyWeather);
+        }).catch((error)=>{console.log(error)})
      }
      else if(event.key=='Enter' && cityName==''){
         alert("Enter City");
@@ -58,32 +107,30 @@ input.addEventListener('keypress', (event)=>{
 })
 
 
+// return the promise of current weather
+function fetchCurrentWeather(currentUrl){
+
+    return fetch(currentUrl).then((currentWeather)=>{
+        if(!currentWeather.ok){
+            console.log("Error in API 1, status:"+currentWeather.status);
+        }
+      return  currentWeather.json();
+    }).catch((error)=>{
+        console.log("Error:"+error);
+    })
+   
+}
+     
 
 
-function weatherCondition(data){
-    //creating parent div for displaying todays weather
-    let todayWeather=document.createElement('div');
-    todayWeather.id='today-weather'; //setting id
-    containerElement.appendChild(todayWeather); // append to the container
-    
-    //creating a div inside parent div which will dsiplay todays temperarture
-    let todayTemp=document.createElement('div');
-    todayTemp.id='today-temperature';
-    todayWeather.appendChild(todayTemp); //append to the parent div
-    document.querySelector('#today-temperature').innerHTML=`${data.main.temp}<sup>o</sup>`; //displaying the todays tempertaure
-  
-
-////creating a div inside parent div which will dsiplay current weather condition eg. rain, clear etc.
-    let weatherCondition = document.createElement('div');
-    weatherCondition.id='weather-condition';
-    todayWeather.appendChild(weatherCondition); //append to the parent div
-    document.querySelector('#weather-condition').innerHTML=data.weather[0].description;  //displaying the condition
-    
-    
- // Creating Div inside the parent div which will display todays lowest and higest temperaature.
- let minMaxTemp = document.createElement('div');
- minMaxTemp.id='min-max-temperature';
- todayWeather.appendChild(minMaxTemp); //append to the parent div
-
-document.querySelector('#min-max-temperature').innerHTML= `L :${data.main.temp_min}<sup>o</sup>   H :${data.main.temp_max}<sup>o</sup>`; // 
+// return the Promise of daily forcast
+function fetchDailyForcast(forcastUrl){
+     return fetch(forcastUrl).then((dailyWeather)=>{
+        if(!dailyWeather.ok){
+            console.log("Error in API 1, status:"+dailyWeather.status);
+        }
+      return  dailyWeather.json();
+    }).catch((error)=>{
+        console.log("Error:"+error);
+    })
 }
