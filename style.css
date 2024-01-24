@@ -20,11 +20,13 @@ body {
     font-weight: bold;
     color: white;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.3); /* Add some opacity for better readability */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Add some opacity for better readability */
+    padding-bottom: 2rem;
 }
 
 .container input {
-    width: 30em;
+    width: 40%;
     height: 2em;
     padding-left: 30px;
 }
@@ -32,49 +34,113 @@ body {
 /* putting the search button inside the search bar */
 span {
     position: relative;
-    color:black;
+    color: black;
 }
 
-span i{
+span i {
     position: absolute;
     left: 10px;
     transform: translateY(50%);
 }
 
-.crossIcon{
+.crossIcon {
     position: relative;
-    color:black;
+    color: black;
 }
-.crossIcon i{
+
+.crossIcon i {
     position: absolute;
     left: -20px;
     transform: translateY(50%);
     cursor: pointer;
 }
 
-h2{
+h2 {
     text-align: center;
     color: white;
     font-size: 2rem;
     margin-top: 1rem;
 }
 
-#today-temperature{
+#today-temperature {
     color: white;
     text-align: center;
-    font-size:3rem;
+    font-size: 3rem;
 }
 
-#weatherTxt,#min-max-temperature{   
+#weatherTxt,
+#min-max-temperature {
     color: white;
     text-align: center;
     font-size: 1rem;
-    margin-top:0.5rem ;
+    margin-top: 0.5rem;
 }
 
 /* the container of weather condtion and weather emog */
-.weather_Condition_Emog{
+.weather_Condition_Emog {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     transform: translateX(-2%);
 }
+
+#dailyImgIcon {
+    width: 50%;
+    /* transform: translateY(-10%); */
+}
+
+#forcast {
+    width: 60%;
+    min-height: 40%;
+    margin: auto;
+    background-color: rgba(33, 33, 111, 0.171);
+    border-radius: 5%;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+table {
+    margin: auto;
+}
+
+table tr td:last-child {
+    padding-left: 2rem;
+}
+
+input[type="text"]:focus {
+    border: 2px solid rgba(0, 0, 255, 0.61);
+    outline: none; /* Remove the default outline */
+}
+
+
+/* ////////////////////// For Mobile(Small Screen)/////////////// */
+
+@media screen and (max-width:1200px) {
+
+    body {
+        height: 100vh; /* Set the height to the full viewport height */
+        margin: 0; /* Remove default margin */
+        padding: 0;
+        overflow-y: hidden;
+    
+    }
+
+    .container{
+        max-width: 60vh;
+        min-height: 40vh;
+    }
+
+
+    #forcast{
+        width: 90%;
+        min-height: 40%;
+    }
+
+    .container input {
+    width: 80%;
+    height: 2em;
+    padding-left: 30px;
+}
+
+
+}
+
