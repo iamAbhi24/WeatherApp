@@ -35,9 +35,9 @@ crossIcon.addEventListener('click', () => {
 
 
 
-function displayWeather(currentWeather, dailyWeather) {
-    //     //creating parent div for displaying todays weather
-    let todayWeather = document.createElement('div');
+function displayWeather(currentWeather, dailyWeather) {   
+      
+    let todayWeather = document.createElement('div');//creating parent div for displaying todays weather
     todayWeather.id = 'today-weather'; //setting id
     containerElement.appendChild(todayWeather); // append to the container
 
@@ -159,17 +159,25 @@ input.addEventListener('keypress', (event) => {
     const forcastUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=5&aqi=no&alerts=no`;
 
     if (event.key == 'Enter' && cityName != '') {
+
+        Pageloading(); // loading untill fetch the data
+
         // It will wait for all promise to resolve 
         Promise.all([fetchCurrentWeather(currentUrl), fetchDailyForcast(forcastUrl)])
             .then(([currentWeather, dailyWeather]) => {
                 // setting the heading as the name of the city
+                containerElement.removeChild(loadingElement);
+                
                 let location = document.createElement('h2');
                 containerElement.appendChild(location);
                 document.querySelector('h2').innerHTML = cityName.toUpperCase();
 
                 //Display Current weather
                 displayWeather(currentWeather, dailyWeather);
-            }).catch((error) => { console.log(error) })
+            }).catch((error) => {
+                 alert(`Enter a valid City!! 
+Note: Please varify the spelling`);
+                 console.log(error) });
     }
     else if (event.key == 'Enter' && cityName == '') {
         alert("Enter City");
@@ -182,11 +190,14 @@ function fetchCurrentWeather(currentUrl) {
 
     return fetch(currentUrl).then((currentWeather) => {
         if (!currentWeather.ok) {
-            console.log("Error in API 1, status:" + currentWeather.status);
+            throw new Error(`API 1 error`);
         }
+        
         return currentWeather.json();
+        
     }).catch((error) => {
-        console.log("Error:" + error);
+        // console.log(error);
+        throw error;
     })
 
 }
@@ -197,10 +208,34 @@ function fetchCurrentWeather(currentUrl) {
 function fetchDailyForcast(forcastUrl) {
     return fetch(forcastUrl).then((dailyWeather) => {
         if (!dailyWeather.ok) {
-            console.log("Error in API 1, status:" + dailyWeather.status);
+            // console.log("Error in API 2, status:" + dailyWeather.status);
+            throw new Error("API 2 error");
         }
         return dailyWeather.json();
+    
     }).catch((error) => {
-        console.log("Error:" + error);
+        // console.log("Error:" + error);
+        throw error;
     })
+}
+
+var loadingElement=document.getElementById('loadingContainer');
+// loading the age fetch the data
+function  Pageloading(){
+    if(!containerElement.hasChildNodes()){
+      loadingElement=document.createElement('div');
+      loadingElement.id='loadingContainer';
+      var spinner=`<div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>`
+    loadingElement.innerHTML=spinner;
+    containerElement.appendChild(loadingElement);
+    }
+    else{
+         
+    }
+   
+
 }
