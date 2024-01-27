@@ -12,6 +12,7 @@ body {
     /* font-weight: 100; */
 }
 
+/* Parent container of all elements */
 .container {
     max-width: 60vw;
     min-height: 40vh;
@@ -25,6 +26,7 @@ body {
     padding-bottom: 2rem;
 }
 
+/* input element */
 .container input {
     width: 40%;
     height: 2em;
@@ -42,19 +44,7 @@ span i {
     left: 10px;
     transform: translateY(50%);
 }
-
-.crossIcon {
-    position: relative;
-    color: black;
-}
-
-.crossIcon i {
-    position: absolute;
-    left: -20px;
-    transform: translateY(50%);
-    cursor: pointer;
-}
-
+/* city name heading */
 h2 {
     text-align: center;
     color: white;
@@ -62,12 +52,14 @@ h2 {
     margin-top: 1rem;
 }
 
+/* current temperature  */
 #today-temperature {
     color: white;
     text-align: center;
     font-size: 3rem;
 }
 
+/* current weather condition and min. and max. */
 #weatherTxt,
 #min-max-temperature {
     color: white;
@@ -82,12 +74,12 @@ h2 {
     justify-content: center;
     transform: translateX(-2%);
 }
-
+/* weather imog */
 #dailyImgIcon {
     width: 50%;
     /* transform: translateY(-10%); */
 }
-
+/* 4 days forecast container */
 #forcast {
     width: 60%;
     min-height: 40%;
@@ -105,7 +97,7 @@ table {
 table tr td:last-child {
     padding-left: 2rem;
 }
-
+/* setting forder of text input */
 input[type="text"]:focus {
     border: 2px solid rgba(0, 0, 255, 0.61);
     outline: none; /* Remove the default outline */
@@ -123,24 +115,26 @@ input[type="text"]:focus {
         overflow-y: hidden;
     
     }
-
+/* parent container of all elements */
     .container{
         max-width: 60vh;
         min-height: 40vh;
     }
 
-
+/* 4 days forcast container */
     #forcast{
         width: 90%;
         min-height: 40%;
     }
 
+    /* text input */
     .container input {
     width: 80%;
     height: 2em;
     padding-left: 30px;
 }
 
+/* contain spinner */
 #loadingContainer{
     height: 40%;
     width: 40%;
